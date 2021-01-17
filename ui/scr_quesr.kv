@@ -1,0 +1,33 @@
+#:import constant app_module.contant
+<Recycle_Button>:
+	background_normal: f"atlas://{constant.ASSEST_PATH}/theme/btn_d"
+	background_down:f"atlas://{constant.ASSEST_PATH}/theme/btn_p"
+	size_hint_y: None
+	height: 5
+	markup: True
+	on_release:root.show_password()
+<Screen_Query>:
+	name:"scrquery"
+	on_enter:root.entered()
+	BoxLayout:
+		orientation: 'vertical'
+		Custom_Btn:
+			text:"Back"
+			size_hint_y: .2
+			first_focus:True
+			on_release:root.go_back()
+		RecycleView:
+			scroll_type :["bars", "content"]
+			bar_width:15
+			id:review
+			viewclass: 'Recycle_Button'
+		    orientation: "vertical"
+		    spacing: 40
+		    padding:10, 10
+		    RecycleBoxLayout: 
+		        color:(0, 0.7, 0.4, 0.8) 
+		        default_size: None, dp(35) 
+		        default_size_hint: 1, None 
+		        size_hint_y: None
+		        height: self.minimum_height 
+		        orientation: 'vertical' 

@@ -1,0 +1,57 @@
+#:import constant app_module.contant
+
+<LoginScreen>:
+    name: "login"
+    on_enter: root.set_size()
+    canvas.before:
+        Color:
+            rgba: constant.BGCOLOR
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    BoxLayout:
+        AnchorLayout:
+            anchor_x: "center"
+            anchor_y: "center"
+            GridLayout:
+                cols: 1
+                padding: (20, 40, 20, 20)
+                id: grid_laout
+                size_hint_y: None
+                height: self.minimum_height
+                row_default_height: "38dp"
+                spacing: (15, 15)
+                BoxLayout:
+                    orientation: 'vertical'
+                    Label:
+                        font_name: constant.FONT_PATH
+                        font_size: "18sp"
+                        id:txt_user
+                        
+                    Label:
+                        text:txt_pass.iscps_on
+                        font_name: constant.FONT_PATH
+                        markup: True
+                        
+                BoxLayout:
+                    spacing: 5
+                    Custom_Txt:
+                        id: txt_pass
+                        hint_text: "password"
+                        allow_copy: False
+                        multiline: False
+                        password: True
+                        password_mask: "*"
+                    Show_Pass:
+                        on_press: txt_pass.password = False
+                        on_release: root.enable_pass()
+                        disabled: True if not txt_pass.text else False
+
+                BoxLayout:
+                    spacing: 2
+                    Custom_Btn:
+                        size_hint_x: None
+                        width: txt_pass.width
+                        pos_hint: {'x': .2, 'y': .2}
+                        text: "Login"
+                        on_release: root.btn_login_click()

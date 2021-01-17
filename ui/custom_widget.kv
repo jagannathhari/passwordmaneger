@@ -1,0 +1,73 @@
+#:import constant app_module.contant
+#:import C kivy.utils.get_color_from_hex
+<Custom_Btn>:
+	canvas.before:
+        Color:
+            rgba: 1,1,1,1
+        Rectangle:
+            pos: self.x-2, self.y-2
+            size: (self.size[0]+4, self.size[1]+4) if self.focus else (0,0)
+	background_normal: f"atlas://{constant.ASSEST_PATH}/theme/btn_n"
+	background_down:f"atlas://{constant.ASSEST_PATH}/theme/btn_p"
+	font_name:constant.FONT_PATH
+
+<Custom_Txt>:
+	font_size: '16dp'
+	background_active:f"atlas://{constant.ASSEST_PATH}/theme/txt_focus"
+	background_normal:f"atlas://{constant.ASSEST_PATH}/theme/txt_normal"
+	cursor_color:constant.ACTIVE_COLOR
+	foreground_color:constant.TEXT_COLOR
+	multiline: False
+	input_filter: lambda text, from_undo: text[:40 - len(self.text)]
+	write_tab:False
+	selection_color:constant.SE_COLOR
+	font_name:constant.FONT_PATH
+
+<Custom_Popup>:
+	auto_dismiss: root.can_dismiss
+	separator_color:constant.ACTIVE_COLOR
+	title_font:constant.FONT_PATH 
+	background:f"atlas://{constant.ASSEST_PATH}/theme/txt_focus"
+	separator_height:0
+	title_size:16
+	BoxLayout:
+		orientation: 'vertical'
+		Label:
+			color : root.lbl_color
+			text: root.lbl_text
+			font_size: 18
+			markup: True
+			font_name:constant.FONT_PATH_NORMAL
+
+		AnchorLayout:
+			anchor_x: "right"
+			anchor_y: "bottom"
+			BoxLayout:
+				size_hint_y:.5
+				size_hint_x: .5
+				spacing:5
+				Custom_Btn:
+					id:btn1
+					first_focus:True
+					on_release:root.btn_bind_()
+				Custom_Btn:
+					id:btn2
+					on_release:root.btn_cancle_()
+
+<Show_Pass>:
+	canvas.before:
+        Color:
+            rgba: 0,0,0,1
+        Rectangle:
+            pos: self.x-2, self.y-2
+            size: (self.size[0]+6, self.size[1]+6) if self.focus else (0,0)
+	background_normal: f"atlas://{constant.ASSEST_PATH}/theme/Show"
+	background_down:f"atlas://{constant.ASSEST_PATH}/theme/Show_p"
+	font_name:constant.FONT_PATH
+	size_hint_x: None
+    size_hint_y: None
+    background_disabled_normal:f"atlas://{constant.ASSEST_PATH}/theme/background"
+    always_release:True
+    width: 25
+    height: 25
+    pos_hint: { 'top' : .72}

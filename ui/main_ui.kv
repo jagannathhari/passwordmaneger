@@ -1,0 +1,24 @@
+#: import NoTransition kivy.uix.screenmanager.NoTransition 
+BoxLayout:
+	orientation: 'vertical'
+	ScrnManager:
+		id:scr
+		transition:NoTransition()
+		RegisterScreen:
+	    LoginScreen:
+	    Scr_Add:
+	    Screen_Query:
+	AnchorLayout:
+		size_hint_y: None
+		height: lbl_copyright.texture_size[1] +5
+		anchor_x: 'right'
+		anchor_y: 'bottom'
+		Label:
+			id:lbl_copyright
+			text: "[color=#828583]Copyright Jagannath[/color]"
+			size_hint_x: None
+			width: self.texture_size[0] + 10
+			markup: True
+
+
+

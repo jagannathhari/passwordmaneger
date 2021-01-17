@@ -1,0 +1,61 @@
+#:import constant app_module.contant
+<RegisterScreen>:
+    name:"register"
+    canvas.before:
+        Color:
+            rgba: constant.BGCOLOR 
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    BoxLayout:
+        AnchorLayout:
+            anchor_x:"center"
+            anchor_y:"center"
+            GridLayout:
+                cols:1
+                padding:(50,50,50,50)
+                id:grid_laout_
+                size_hint_y: None
+                height: self.minimum_height 
+                row_default_height: "42dp"
+                spacing:(20,20)
+                Custom_Txt:
+                    size_hint_x: None
+                    width: txt_rpass.width
+                    id:txt_user
+                    hint_text:"User Name"
+                    focus:True 
+                    multiline: False
+                    input_filter: lambda text, from_undo: text[:22 - len(self.text)]
+                BoxLayout:
+                    spacing: 5
+                    Custom_Txt:
+                        id:txt_rpass
+                        hint_text:"Password"
+                        allow_copy:False
+                        multiline: False
+                        password:True
+                        password_mask:"*"
+                        input_filter: lambda text, from_undo: text[:20 - len(self.text)]
+
+                    Show_Pass:
+                        on_press:txt_rpass.password = False
+                        on_release:root.enable()
+                        disabled: True if not txt_rpass.text else False
+                Custom_Txt:
+                    size_hint_x: None
+                    width: txt_rpass.width
+                    hint_text:"Confirm Password"
+                    id:txt_rcpass
+                    password:True
+                    password_mask:"*"
+                    multiline: False
+                    input_filter: lambda text, from_undo: text[:20 - len(self.text)]
+
+                BoxLayout:
+                    spacing:2
+                    Custom_Btn:
+                        size_hint_x: None
+                        width: txt_rpass.width
+                        text:"Register"
+                        on_release:root.btn_register_click()

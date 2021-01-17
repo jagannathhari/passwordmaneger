@@ -1,0 +1,69 @@
+#:import constant app_module.contant
+<Scr_Add>:
+	name: 'scradd'
+	on_enter:root.db()
+	BoxLayout:
+		orientation: 'vertical'
+		spacing:5
+		BoxLayout:
+
+			GridLayout:
+				padding:[50,40,25,10]
+				spacing:[15,15]
+				rows:4
+				Label:
+					size_hint_y: .1
+					font_name:constant.FONT_PATH
+					text:root.user_name_
+							
+				Custom_Txt:
+					id:txt_server1
+					input_filter: lambda text, from_undo: text[:60 - len(self.text)]
+					hint_text:"ServerName UserName"
+					size_hint_x: None
+                    width: txt_paswd.width
+                    multiline: False
+				BoxLayout:
+					spacing: 5
+					size_hint_x: .5
+					Custom_Txt:
+						id:txt_paswd
+						password:True
+						password_mask:"*"
+						multiline: False
+						hint_text:"password"
+					Show_Pass:
+						on_press:txt_paswd.password = False
+                        on_release:txt_paswd.password = True
+                        disabled: True if not txt_paswd.text else False
+
+				BoxLayout:
+					
+					spacing: 2
+					Custom_Btn:
+						text: 'Add'
+						on_release:root.add()
+				
+					Custom_Btn:
+							
+						text: 'Update'
+						on_release:root.update()
+					Custom_Btn:
+						text:"Remove"
+						id:btn_remove
+						on_release:root.remove()
+						
+					Custom_Btn:
+						text:"Search"
+						on_release:root.show()
+						id:btn_spass
+					Custom_Btn:
+						text:"Query"
+						on_release:root.query()
+						id:btn_query
+						
+					Custom_Btn:
+						text:"Export"
+						on_release:root.export_db()
+				
+				
